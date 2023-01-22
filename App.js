@@ -8,6 +8,7 @@ import Prompt from './components/Prompt';
 import Plan from './components/Plan';
 import Profile from './components/Profile';
 import { useFonts } from 'expo-font';
+import GuideMap from './components/GuideMap';
 
 const Stack = createStackNavigator();
 
@@ -35,15 +36,9 @@ function PromptScreen({ navigation }) {
     );
   }
 
-  function PlanScreen({ navigation }) {
+  function GuideMapScreen({ navigation, route }) {
     return (
-      <Plan navigation={navigation}/>
-    );
-  }
-
-  function ProfileScreen({ navigation }) {
-    return (
-      <Profile navigation={navigation}/>
+      <GuideMap navigation={navigation} route={route} />
     );
   }
 
@@ -64,8 +59,7 @@ export default function App() {
         <Stack.Screen name="SignUp" component={SignUpScreen} />
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Prompt" component={PromptScreen} />
-        <Stack.Screen name="Plan" component={PlanScreen} />
-        <Stack.Screen name="Profile" component={ProfileScreen} />
+        <Stack.Screen name="GuideMap" component={GuideMapScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
