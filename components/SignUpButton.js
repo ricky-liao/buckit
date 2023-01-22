@@ -20,7 +20,7 @@ const buttonStyles = {
         borderWidth: 2,
         borderColor: '#FF6B6B',
         position: "absolute",
-        top: 700,
+        top: "87%",
         left: 34,
         alignItems: "center",
         justifyContent: "center",

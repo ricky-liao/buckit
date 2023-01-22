@@ -19,7 +19,7 @@ const buttonStyles = {
         paddingHorizontal: 0,
         margin: 0,
         position: "absolute",
-        top: 700,
+        top: "87%",
         left: 167,
         alignItems: "center",
         justifyContent: "center",

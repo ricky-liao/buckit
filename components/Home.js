@@ -7,7 +7,7 @@ import {GradientText} from '../screens/GradientText';
 export default function Home ({navigation}) {
     return (
         <View style={styles.container}>
-            <View style={{top: 560, left: 34}}>
+            <View style={{top: "70%", left: 34}}>
                 <GradientText text="Hello," style={{fontSize: 48, fontFamily: 'Roboto Bold'}} />
             </View>
             <View>
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontFamily: 'Roboto',
         position: "absolute",
-        top: 630,
+        top: "78%",
         left: 34,
         transform: [{translateX:0}, {translateY:0}]
     },
