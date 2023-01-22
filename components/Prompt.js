@@ -9,12 +9,49 @@ import {
   Keyboard,
   ScrollView,
   Platform,
-  Button
+  Button,
 } from "react-native";
+import { getGoogleQuery } from "../utils/getGoogleQuery";
+import { getGPTQuery } from "../utils/getGPTQuery";
 
 export default function Prompt({ navigation }) {
-  const [userInput, setUserInput] = React.useState();
+    const [userInput, setUserInput] = React.useState("");
 
+    const handleSubmit = async () => {
+        console.log(userInput);
+        const data = await getGPTQuery(userInput);
+        setUserInput("clicked!");
+        console.log(data);
+    }
+
+    return (
+        <View style={styles.container}>
+        {/* Scroll view to enable scrolling when list gets longer than the page */}
+        <ScrollView
+            contentContainerStyle={{
+                flexGrow: 1,
+            }}
+            keyboardShouldPersistTaps="handled"
+        >
+            <Text>What's on your bucket list?</Text>
+            <TextInput
+                style={styles.input}
+                placeholder={""}
+                value={userInput}
+                onChangeText={(text) => setUserInput(text)}
+            />
+            <Button title="submit" onPress={() => handleSubmit()} />
+        </ScrollView>
+
+        <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            style={styles.writeTaskWrapper}
+        >
+        </KeyboardAvoidingView>
+        </View>
+    );
+    }
+		
   return (
     <View>
       {/* Scroll view to enable scrolling when list gets longer than the page */}
