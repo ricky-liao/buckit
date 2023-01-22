@@ -5,6 +5,7 @@ import Home from './components/Home';
 import SignUp from './components/signUp';
 import Login from './components/Login';
 import Prompt from './components/Prompt';
+import { useFonts } from 'expo-font';
 
 const Stack = createStackNavigator();
 
@@ -33,6 +34,15 @@ function PromptScreen({ navigation }) {
   }
 
 export default function App() {
+    const [loaded] = useFonts({
+      Roboto: require('./assets/fonts/Roboto-Regular.ttf'),
+      'Roboto Bold': require('./assets/fonts/Roboto-Bold.ttf'),
+      'Roboto Medium': require('./assets/fonts/Roboto-Medium.ttf'),
+    });
+
+    if(!loaded) {
+      return null;
+    }
     return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">

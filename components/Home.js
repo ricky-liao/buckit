@@ -1,25 +1,27 @@
 import React from 'react';
-import { StyleSheet, View, Text, Button } from 'react-native';
+import { StyleSheet, View, Text, Image} from 'react-native';
+import SignUpButton from "./SignUpButton";
+import LoginButton from "./LoginButton";
+import {GradientText} from '../screens/GradientText';
 
 export default function Home ({navigation}) {
-
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Hello,</Text>
-            <Text style={styles.text}>Welcome to Buckit {"\n"}
-                                       the AI-driven activity planner</Text>
-            <Button
-                title="Go to Login"
-                onPress={() => navigation.navigate('Login')}
-                style={styles.loginButton}
-                titleStyle={styles.buttonText}
-            />
-            <Button
-                title="Go to Sign Up"
-                onPress={() => navigation.navigate('SignUp')}
-                style={styles.signUpButton}
-                titleStyle={styles.buttonText}
-            />
+            <View style={{top: 560, left: 34}}>
+                <GradientText text="Hello," style={{fontSize: 48, fontFamily: 'Roboto Bold'}} />
+            </View>
+            <View>
+                <Image style={styles.picture}
+                source={require('../assets/buckett.png')} />
+            </View>
+            <View>
+                <Image style={styles.picture2}
+                source={require('../assets/gradientBack.png')} />
+            </View>
+            <Text style={styles.text}>Welcome to <Text style={styles.buck}>Buck</Text><Text style={styles.it}>it</Text>, {"\n"}
+                                       the AI-driven activity planner.</Text>
+            <SignUpButton title="SIGN UP" />
+            <LoginButton title="LOGIN" />
         </View>
     );
 }
@@ -27,48 +29,39 @@ export default function Home ({navigation}) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "pink"
-    },
-
-    title: {
-        color: "green",
-        fontSize: 48,
-        position: "absolute",
-        top: 277,
-        left: 40,
-        transform: [{translateX:0}, {translateY:0}]
+        backgroundColor: "white"
     },
 
     text: {
-        color: "green",
+        color: "black",
         fontSize: 24,
+        fontFamily: 'Roboto',
         position: "absolute",
-        top: 344,
-        left: 40,
+        top: 630,
+        left: 34,
         transform: [{translateX:0}, {translateY:0}]
     },
 
-    loginButton: {
-        backgroundColor: '#4CAF50',
-        borderRadius: 50,
-        padding: 10,
-        margin: 10,
-        position: "absolute",
-        bottom: 0,
-        left: 50,
+    picture: {
+        width: 320,
+        height: 450,
+        top: 20,
+        left: 0,
     },
 
-    signUpButton: {
-        backgroundColor: '#4CAF50',
-        borderRadius: 50,
-        padding: 10,
-        margin: 10,
-        position: "absolute",
-        bottom: 200,
-        left: 100,
+    picture2: {
+        width: 450,
+        height: 600,
+        top: -510,
+        left: 0,
     },
 
-    buttonText: {
-        color: 'white',
+    buck: {
+        fontFamily: 'Roboto Bold',
+    },
+
+    it: {
+        fontFamily: 'Roboto Bold',
+        color: "#FF6B6B",
     },
 });
