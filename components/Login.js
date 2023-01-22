@@ -9,6 +9,10 @@ export default function Login ({navigation}) {
             title="Go to Home"
             onPress={() => navigation.navigate('Home')}
           />
+          <Button
+            title="Go to Prompt"
+            onPress={() => navigation.navigate('Prompt')}
+          />
         </View>
       );
 }

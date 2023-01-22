@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Home from './components/Home';
 import Login from './components/Login';
+import Prompt from './components/Prompt';
 
 const Stack = createStackNavigator();
 
@@ -18,12 +19,19 @@ function LoginScreen({ navigation }) {
   );
 }
 
+function PromptScreen({ navigation }) {
+    return (
+      <Prompt navigation={navigation}/>
+    );
+  }
+
 export default function App() {
     return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="Prompt" component={PromptScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
