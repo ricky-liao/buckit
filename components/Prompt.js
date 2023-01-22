@@ -5,8 +5,6 @@ import {
   Text,
   View,
   TextInput,
-  TouchableOpacity,
-  Keyboard,
   ScrollView,
   Platform,
   Button,
@@ -16,12 +14,18 @@ import { getGPTQuery } from "../utils/getGPTQuery";
 
 export default function Prompt({ navigation }) {
     const [userInput, setUserInput] = React.useState("");
+    const [res, setRes] = React.useState("");
 
     const handleSubmit = async () => {
         console.log(userInput);
         const data = await getGPTQuery(userInput);
         setUserInput("clicked!");
         console.log(data);
+        if (data && data.generated_text) {
+            setRes(data.generated_text);
+        } else {
+            setUserInput("ERROR!!!");
+        }
     }
 
     return (
@@ -41,6 +45,7 @@ export default function Prompt({ navigation }) {
                 onChangeText={(text) => setUserInput(text)}
             />
             <Button title="submit" onPress={() => handleSubmit()} />
+            <Text>Res = {res}</Text>
         </ScrollView>
 
         <KeyboardAvoidingView
