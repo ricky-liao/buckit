@@ -7,7 +7,8 @@ import {
   ScrollView,
   Platform,
   Button,
-  View
+  View,
+  TouchableOpacity
 } from "react-native";
 import { Modal } from 'react-native';
 import { Dimensions } from "react-native";
@@ -15,16 +16,16 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { getGoogleQuery } from "../utils/getGoogleQuery";
 import { getGPTQuery } from "../utils/getGPTQuery";
 import { checkGPTQuery } from "../utils/checkGPTQuery";
+import SelectButton from "./SelectButton";
 
 export default function Prompt({ navigation }) {
     const [userInput, setUserInput] = React.useState("");
     const [res, setRes] = React.useState("");
     const [modalVisible, setModalVisible] = React.useState(false);
-    const [tab, setTab] = React.useState(0);
+    const [tab, setTab] = React.useState("Interests");
     const screenHeight = Dimensions.get('window').height;
 
-    const handleSubmit = async () => {
-        console.log(userInput);
+    const openModal = async () => {
         const category = await checkGPTQuery(userInput);
         let parse = category.generated_text;
         parse = parse.toLowerCase();
@@ -35,12 +36,17 @@ export default function Prompt({ navigation }) {
                 setRes("Sorry, we can't handle this bucket list goal.");
                 return;
             }
-        //const data = await getGPTQuery(userInput);
         setModalVisible(true);
-        setUserInput("clicked!");
-        console.log(data);
+    }
+
+    const handleSubmit = async () => {
+        const data = await getGPTQuery(userInput);
         if (data && data.generated_text) {
             setRes(data.generated_text);
+            navigation.navigate("GuideMap", {
+                data: data.generated_text,
+                input: userInput
+            });
         } else {
             setUserInput("ERROR!!!");
         }
@@ -62,8 +68,9 @@ export default function Prompt({ navigation }) {
                     value={userInput}
                     onChangeText={(text) => setUserInput(text)}
                 />
-                <Button title="submit" onPress={() => handleSubmit()} />
-                <Text style={styles.text}>{res}</Text>
+                <TouchableOpacity style={styles.button} onPress={() => openModal()}>
+                    <Text style={styles.buttonText}>Get my plan</Text>
+                </TouchableOpacity>
             </View>
         </ScrollView>
 
@@ -83,22 +90,85 @@ export default function Prompt({ navigation }) {
         >
           <View style={{ marginTop: 400, height: screenHeight, backgroundColor: "white", borderRadius: 20}}>
             <View>
-                <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 20, marginTop: 10 }}>
-                    <Button title="Interests" onPress={() => setTab(0)} />
-                    <Button title="Party Size" onPress={() => setTab(1)} />
-                    <Button title="Budget" onPress={() => setTab(2)} />
-                    <Button title="Date" onPress={() => setTab(3)} />
+                <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 20, marginTop: 15 }}>
+                    <Button title="Interests" onPress={() => setTab("Interests")} />
+                    <Button title="Party Size" onPress={() => setTab("Party Size")} />
+                    <Button title="Budget" onPress={() => setTab("Budget")} />
+                    <Button title="Date" onPress={() => setTab("Date")} />
+
 
                 </View>
+                <View style={{ display: 'flex', justifyContent: 'center', alignContent: 'center', alignItems: 'center', marginTop: 10 }}>
+                    <Text style={{ fontSize: 20 }}>Select your {tab}</Text>
+                </View>
+                <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignContent: 'center', alignItems: 'center', marginTop: 25, flexWrap: 'wrap', marginVertical: 10 }}>
+                    
 
+                    {tab == "Interests" ? (
+                        <>
+                        {interests_data.map((interest, index) =>(
+                            <SelectButton
+                                key={index} 
+                                title={interest.value} 
+                            />
+                        ))}
+                        </>
+                        
+                    ) : ""}
+                    {tab == "Party Size" ? (<Text>Party Size</Text>) : ""}
+                    {tab == "Budget" ? (<Text>Budget</Text>) : ""}
+                    {tab == "Date" ? (<Text>Date</Text>) : ""}
+                </View>
               
-              <Button title="close" onPress={() => setModalVisible(false)} />
+              <Button title="Save" onPress={() => {
+                setModalVisible(false);
+                handleSubmit();
+              }} />
             </View>
           </View>
         </Modal>
       </LinearGradient>
     );
 }
+
+const interests_data = [
+    {
+        label: "Adventure",
+        value: 'adventure'
+    },
+    {
+        label: "Education",
+        value: 'education'
+    },
+    {
+        label: "Culture",
+        value: 'culture'
+    },
+    {
+        label: "Nature",
+        value: 'nature'
+    },
+    {
+        label: "Personal Development",
+        value: 'personal development'
+    },
+    {
+        label: "Career",
+        value: 'career'
+    },
+    {
+        label: "Social",
+        value: 'social'
+    },
+    {
+        label: "Charity",
+        value: 'charity'
+    },
+    {
+        label: "Life-event",
+        value: 'life-event'
+    },
+];
 
 
 const styles = StyleSheet.create({
@@ -110,6 +180,23 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginHorizontal: 50
+    },
+    button: {
+        backgroundColor: 'white',
+        borderRadius: 63,
+        width: 120,
+        height: 40,
+        padding: 5,
+        margin: 0,
+        borderWidth: 2,
+        borderColor: '#FF6B6B',
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    buttonText: {
+        color: '#FF6B6B',
+        fontFamily: 'Roboto Medium',
+        fontSize: 16,
     },
     text: {
         color: 'white',
@@ -127,7 +214,8 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.8,
         shadowRadius: 2,
-        borderRadius: 8
+        borderRadius: 8,
+        marginBottom: 20
     },
     addWrapper: {
         width: 60,

@@ -6,6 +6,7 @@ import SignUp from './components/signUp';
 import Login from './components/Login';
 import Prompt from './components/Prompt';
 import { useFonts } from 'expo-font';
+import GuideMap from './components/GuideMap';
 
 const Stack = createStackNavigator();
 
@@ -33,6 +34,12 @@ function PromptScreen({ navigation }) {
     );
   }
 
+  function GuideMapScreen({ navigation, route }) {
+    return (
+      <GuideMap navigation={navigation} route={route} />
+    );
+  }
+
 export default function App() {
     const [loaded] = useFonts({
       Roboto: require('./assets/fonts/Roboto-Regular.ttf'),
@@ -50,6 +57,7 @@ export default function App() {
         <Stack.Screen name="SignUp" component={SignUpScreen} />
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Prompt" component={PromptScreen} />
+        <Stack.Screen name="GuideMap" component={GuideMapScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
