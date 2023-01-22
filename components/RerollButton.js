@@ -1,9 +1,9 @@
 import React from "react";
 import {TouchableOpacity, Text, View, StyleSheet} from 'react-native'
 
-export default function LoginButton(props) {
+export default function RerollButton(props) {
     return (
-        <TouchableOpacity style={buttonStyles.button} onPress={() => props.navigation.navigate('Plan')}>
+        <TouchableOpacity style={buttonStyles.button}>
             <Text style={[buttonStyles.buttonText, props.textStyle]}>{props.title}</Text>
         </TouchableOpacity>
     );
@@ -11,22 +11,23 @@ export default function LoginButton(props) {
 
 const buttonStyles = {
     button: {
-        backgroundColor: '#FF6B6B',
+        backgroundColor: 'white',
         borderRadius: 63,
-        width: 100,
-        height: 40,
+        width: 110,
+        height: 38,
         padding: 10,
-        paddingHorizontal: 0,
         margin: 0,
+        borderWidth: 2,
+        borderColor: '#FF6B6B',
         position: "absolute",
-        top: "87%",
-        left: 167,
+        top: 735,
+        left: 60,
         alignItems: "center",
         justifyContent: "center",
     },
     buttonText: {
-        color: 'white',
+        color: '#FF6B6B',
         fontFamily: 'Roboto Medium',
-        fontSize: 16,
+        fontSize: 12,
     }
 }

@@ -5,6 +5,7 @@ import Home from './components/Home';
 import SignUp from './components/signUp';
 import Login from './components/Login';
 import Prompt from './components/Prompt';
+import Plan from './components/Plan';
 import { useFonts } from 'expo-font';
 
 const Stack = createStackNavigator();
@@ -33,6 +34,13 @@ function PromptScreen({ navigation }) {
     );
   }
 
+  function PlanScreen({ navigation }) {
+    return (
+      <Plan navigation={navigation}/>
+    );
+  }
+
+
 export default function App() {
     const [loaded] = useFonts({
       Roboto: require('./assets/fonts/Roboto-Regular.ttf'),
@@ -50,6 +58,7 @@ export default function App() {
         <Stack.Screen name="SignUp" component={SignUpScreen} />
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Prompt" component={PromptScreen} />
+        <Stack.Screen name="Plan" component={PlanScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
