@@ -20,8 +20,8 @@ export default function Home ({navigation}) {
             </View>
             <Text style={styles.text}>Welcome to <Text style={styles.buck}>Buck</Text><Text style={styles.it}>it</Text>, {"\n"}
                                        the AI-driven activity planner.</Text>
-            <SignUpButton title="SIGN UP" />
-            <LoginButton title="LOGIN" />
+            <SignUpButton navigation={navigation} title="SIGN UP" />
+            <LoginButton navigation={navigation} title="LOGIN" />
         </View>
     );
 }
