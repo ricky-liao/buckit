@@ -16,3 +16,17 @@ export function GradientText (props) {
         </MaskedView>
     );
 }
+
+export function GradientButton (props) {
+    return (
+        <View>
+            <LinearGradient
+                start={{x: 0, y: 0}}
+                end={{x: 1, y: 1}}
+                colors={['#FF6B6B', '#FF9776']}
+            >
+                <Text style={[props.style, {backgroundColor: 'transparent', padding: 20}]}>{props.text}</Text>
+            </LinearGradient>
+        </View>
+    );
+}

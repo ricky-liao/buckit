@@ -6,6 +6,7 @@ import SignUp from './components/signUp';
 import Login from './components/Login';
 import Prompt from './components/Prompt';
 import Plan from './components/Plan';
+import Profile from './components/Profile';
 import { useFonts } from 'expo-font';
 
 const Stack = createStackNavigator();
@@ -40,6 +41,11 @@ function PromptScreen({ navigation }) {
     );
   }
 
+  function ProfileScreen({ navigation }) {
+    return (
+      <Profile navigation={navigation}/>
+    );
+  }
 
 export default function App() {
     const [loaded] = useFonts({
@@ -59,6 +65,7 @@ export default function App() {
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Prompt" component={PromptScreen} />
         <Stack.Screen name="Plan" component={PlanScreen} />
+        <Stack.Screen name="Profile" component={ProfileScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
