@@ -5,6 +5,8 @@ import Home from './components/Home';
 import SignUp from './components/signUp';
 import Login from './components/Login';
 import Prompt from './components/Prompt';
+import Plan from './components/Plan';
+import Profile from './components/Profile';
 import { useFonts } from 'expo-font';
 import GuideMap from './components/GuideMap';
 
