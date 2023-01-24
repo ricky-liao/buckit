@@ -3,7 +3,7 @@ import {TouchableOpacity, Text, View, StyleSheet} from 'react-native'
 
 export default function LoginButton(props) {
     return (
-        <TouchableOpacity style={buttonStyles.button} onPress={() => props.navigation.navigate('Profile')}>
+        <TouchableOpacity style={buttonStyles.button} onPress={() => props.navigation.navigate('Prompt')}>
             <Text style={[buttonStyles.buttonText, props.textStyle]}>{props.title}</Text>
         </TouchableOpacity>
     );
